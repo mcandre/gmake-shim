@@ -14,7 +14,6 @@ import (
 
 	"github.com/magefile/mage/mg"
 	"github.com/mcandre/gmake-shim"
-	"github.com/mcandre/go-mkdir"
 )
 
 // ArtifactsPath describes where artifacts are produced.
@@ -183,7 +182,7 @@ var AllCommandsPath = strings.Join([]string{".", "cmd", "..."}, PathSeparatorStr
 
 // Artifacts cross-compiles Go binaries.
 func Artifacts() error {
-	if err := mkdir.EnsureDirectory(ArtifactsPath); err != nil {
+	if err := os.MkdirAll(ArtifactsPath, os.ModeDir|0775); err != nil {
 		return err
 	}
 
