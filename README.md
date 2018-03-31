@@ -12,6 +12,10 @@ Works!
 
 https://github.com/mcandre/gmake-shim/releases
 
+# DOCUMENTATION
+
+https://godoc.org/github.com/mcandre/gmake-shim
+
 # ABOUT
 
 It may surprise developers that make is unreliable, with many projects implicitly relying on GNU make syntax and semantics, whereas many environments default to BSD make instead. This tends to break the build. Developers interested in cross-platform support may wish to rename these `makefile`s to `GNUmakefile`s and replace `make` commands with `gmake` to disambiguate.
