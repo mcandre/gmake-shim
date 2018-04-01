@@ -63,6 +63,7 @@ $ go get github.com/mcandre/gmake-shim/...
 $ mkdir -p $GOPATH/src/github.com/mcandre
 $ git clone https://github.com/mcandre/gmake-shim.git $GOPATH/src/github.com/mcandre/gmake-shim
 $ cd $GOPATH/src/github.com/mcandre/gmake-shim
+$ git submodule update --init --recursive
 $ sh -c 'cd cmd/gmake-shim && go install ./...'
 ```
 
