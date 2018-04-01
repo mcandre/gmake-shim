@@ -94,7 +94,7 @@ $ mage lint
 # PORT
 
 ```console
-$ mage ports
+$ mage port
 ```
 
 # CLEAN ALL ARTIFACTS
