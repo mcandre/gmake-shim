@@ -2,6 +2,7 @@ package gmake_test
 
 import (
 	"testing"
+
 	"github.com/mcandre/gmake-shim"
 )
 
