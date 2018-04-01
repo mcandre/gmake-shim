@@ -95,3 +95,9 @@ $ mage lint
 ```console
 $ mage ports
 ```
+
+# CLEAN ALL ARTIFACTS
+
+```console
+$ mage clean; mage uninstall; mage -clean
+```
