@@ -18,15 +18,15 @@ https://godoc.org/github.com/mcandre/gmake-shim
 
 # ABOUT
 
-It may surprise developers that make is unreliable, with many projects implicitly relying on GNU make syntax and semantics, whereas many environments default to BSD make instead. This tends to break the build. Developers interested in cross-platform support may wish to rename these `makefile`s to `GNUmakefile`s and replace `make` commands with `gmake` to disambiguate.
+It may surprise developers that make is unreliable, with many projects implicitly relying on GNU make syntax and semantics, whereas many environments default to bmake instead. This tends to break the build. Developers interested in cross-platform support may wish to rename these `makefile`s to `GNUmakefile`s and replace `make` commands with `gmake` to disambiguate.
 
-While this would improve the build in BSD environments, ironically this breaks the build in many GNU/Linux environments. Evidently, package maintainers are also unreliable, often omitting the gmake command from their GNU make packages. You're safe with BSD's, RHEL's, macOS/Homebrew, and macOS/MacPorts, but unsafe in Debian's, Alpine, OpenWrt, Void, Windows/Chocolatey, macOS/Xcode, and macOS/Fink. So while GNU make is available in all of these systems, it seems that there isn't a standard way to trigger GNU make-based builds, without sacrificing support for many platforms either way. make just isn't that portable, unfortunately. How do we deal with this situation?
+While this would improve the build in BSD environments, ironically this breaks the build in many GNU/Linux environments! Evidently, package maintainers are also unreliable, often omitting the gmake command from their GNU make packages. You're safe with BSD systems, RHEL's, macOS/Homebrew, and macOS/MacPorts, but unsafe in Debian, Alpine, OpenWrt, Void, Windows/Chocolatey, macOS/Xcode, and macOS/Fink. So while GNU make is available in all of these systems, it seems that there isn't a standard way to trigger GNU make-based builds, without sacrificing support for many platforms either way. make just isn't that portable, unfortunately. How do we deal with this situation?
 
 * Vendor-lock to GNU/Linux, GNU make, and running `make`. No thanks.
-* Wrap `make` calls in a dispatcher that invoke `make`, `bmake`, `gmake`, etc. according to the particular environment, overcomplicating everything. Non!
+* Wrap `make` calls in a dispatcher that invoke `make`, `bmake`, `bsdmake`, `gmake`, etc. according to the particular environment, overcomplicating everything. Non!
 * Rewrite the build in terms of pure POSIX make syntax and semantics. This means no `ifdef`, so this isn't a realistic option but for the very simplest of builds. Also, there aren't many ways to statically verify that a makefile avoids GNU or BSD features, so this is a difficult posture to maintain.
-* Rewrite the build explicitly in terms of BSD make. Alas, fewer platforms have a BSD make package available compared to GNU make, so you would be vendor-locking yourself out of Windows/Chocolatey, for example. In addition, BSD make may be unavailable as the `bmake` command on BSD's, so you would arrive at the same problem as GNU make!
-* Rewrite the build in a tool with more standard behavior across different platforms, such as cmake, autotools, mage, Shake, Gradle, Gulp, or even bash or POSIX sh scripts. Long term, this is by far the most reliable solution. However, rewriting a project's build system can involve a lot of time and effort.
+* Rewrite the build explicitly in terms of bmake. Alas, fewer platforms have a bmake package available compared to GNU make, so you would be vendor-locking yourself out of Windows/Chocolatey, for example. In addition, bmake may be unavailable as the `bmake` command on BSD systems, so you would arrive at the same problem as GNU make!
+* Rewrite the build in a tool with more standard behavior across different platforms, such as Mage, Tinyrick, Shake, Rake, Invoke, Gulp, Grunt, Gradle, Maven, CMake, Autotools, Makefile.PL, build.sh scripts, dedicated applications, etc. Long term, this is by far the most reliable solution. However, rewriting a project's build system can involve a lot of time and effort.
 
 For projects that depend on GNU make, the most immediately practical option for improving cross-platform support is to run build commands as `gmake` and shim environments that omit this command.
 
@@ -102,3 +102,7 @@ $ mage port
 ```console
 $ mage clean; mage uninstall; mage -clean
 ```
+
+# SEE ALSO
+
+https://github.com/mcandre/bmake-shim
